@@ -16,7 +16,7 @@ const getAllProducts = async (req, res) => {
 //get by id
 const getProductById = async (req, res) => {
     const id = req.params.id
-    const data = await productModel.findById({})
+    const data = await productModel.findById(id)
     res.status(200).send({data:data, message: 'OK'})
 }
 //delete product
@@ -29,7 +29,7 @@ const deleteProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
     const id = req.params.id
     const newData = req.body
-    const data = await productModel.findByIdAndUpdate({id, newData})
+    const data = await productModel.findByIdAndUpdate(id, newData)
     res.status(200).send({data:data, message: 'OK'})
 }
 

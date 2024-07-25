@@ -1,4 +1,5 @@
-const UserModel = require('../models/users')
+const UserModel = require('../models/users');
+const { jwtToken } = require('../utils/jwtToken');
 const SignUpJoi = require('../validation/signUpJoi')
 const bcrypt = require('bcrypt');
 
@@ -36,9 +37,12 @@ const Login = async (req, res) => {
 
         // Compare the password
         const isMatch = await bcrypt.compare(req.body.password, user.password);
-        if (!isMatch) throw new Error("Invalid credentials");
+        if (!isMatch) throw new Error("Invalid password");
 
-        res.status(200).send({ status: true, message: "Success" });
+        const token = await jwtToken(isMatch.email, isMatch.password)
+        // console.log(token);
+
+        res.status(200).send({ status: true, message: "Success", token: token });
     } catch (error) {
         res.status(500).send({ status: false, error: error.message });
     }

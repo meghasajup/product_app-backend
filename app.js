@@ -1,12 +1,13 @@
+require('dotenv').config();
 const express = require ('express')
 const app = express()
-const routes = require('./routes')
+
 const morgan = require('morgan')
-require('dotenv').config();
 require('./db')
 const cors = require('cors')
 
 const PORT = process.env.PORT || 4528;
+const routes = require('./routes')
 app.use(cors({
     origin: '*'
 }))
