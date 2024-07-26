@@ -1,10 +1,11 @@
 const express = require('express');
 const asyncHandler = require('../../utils/asyncHandler');
 const { addProduct, getAllProducts, deleteProduct, getProductById, updateProduct } = require('../../controllers/productController');
+const { verifyToken } = require('../../utils/jwtToken');
 
 const router = express.Router();
 
-router.post('/', asyncHandler(addProduct))
+router.post('/', verifyToken, asyncHandler(addProduct))
     .get('/', asyncHandler(getAllProducts))
     .delete('/:id', asyncHandler(deleteProduct))
     .put('/:id', asyncHandler(updateProduct))
