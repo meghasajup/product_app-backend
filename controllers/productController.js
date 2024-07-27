@@ -1,13 +1,5 @@
 const productModel = require('../models/products')
 const ProductJoi = require("../validation/productJoi");
-//add product
-// const addProduct = async (req, res) => {
-//     const data = req.body
-//     const saveData = new productModel(data); 
-//     if(!saveData) throw new Error (400,'Insert all data')
-//     await saveData.save();
-//     res.status(200).send({message: 'data saved successfully'})
-// }
 
 const addProduct = async (req, res) => {
   try {

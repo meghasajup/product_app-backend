@@ -6,7 +6,7 @@ const upload = require('../../utils/multer');
 
 const router = express.Router();
 
-router.post('/products', verifyToken, upload.single('image'), asyncHandler(addProduct))
+router.post('/', verifyToken, upload.single('image'), asyncHandler(addProduct))
     .get('/', asyncHandler(getAllProducts))
     .delete('/:id', asyncHandler(deleteProduct))
     .put('/:id', asyncHandler(updateProduct))

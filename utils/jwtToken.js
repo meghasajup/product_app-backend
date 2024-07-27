@@ -5,12 +5,12 @@ const jwtToken = async (user, password) => {
 
     const userData = { user, password }
     const options = {
-        expiresIn: "1h",
+        expiresIn: "2h",
         audience: 'entri-user',
         issuer: 'emtri'
     }
 
-    let token = await jwt.sign(userData, secretKey);
+    let token = await jwt.sign(userData, secretKey, options);
     return token;
 }
 
@@ -24,6 +24,7 @@ const verifyToken = async (req, res, next) => {
 
         jwt.verify(token, secretKey, (err, payload) => {
             if (err) throw new Error;
+            req.user = payload;
                 next();
         })
     } catch (error) {
