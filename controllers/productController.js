@@ -1,13 +1,32 @@
 const productModel = require('../models/products')
 const ProductJoi = require("../validation/productJoi");
 //add product
+// const addProduct = async (req, res) => {
+//     const data = req.body
+//     const saveData = new productModel(data); 
+//     if(!saveData) throw new Error (400,'Insert all data')
+//     await saveData.save();
+//     res.status(200).send({message: 'data saved successfully'})
+// }
+
 const addProduct = async (req, res) => {
-    const data = req.body
-    const saveData = new productModel(data); 
-    if(!saveData) throw new Error (400,'Insert all data')
-    await saveData.save();
-    res.status(200).send({message: 'data saved successfully'})
-}
+  try {
+    const product = new Product({
+      title: req.body.title,
+      category: req.body.category,
+      description: req.body.description,
+      quantity: req.body.quantity,
+      price: req.body.price,
+      image: req.file.path,
+    });
+
+    await product.save();
+    res.status(201).json({ message: 'Product created successfully', product });
+  } catch (error) {
+    res.status(500).json({ message: 'Error creating product', error });
+  }
+};
+
 //get all products
 const getAllProducts = async (req, res) => {
     const allData = await productModel.find({})
