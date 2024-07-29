@@ -7,7 +7,7 @@ const jwtToken = async (user, password) => {
     const options = {
         expiresIn: "2h",
         audience: 'entri-user',
-        issuer: 'emtri'
+        issuer: 'entri'
     }
 
     let token = await jwt.sign(userData, secretKey, options);

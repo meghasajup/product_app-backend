@@ -1,8 +1,8 @@
 const express = require('express');
 const asyncHandler = require('../../utils/asyncHandler');
 const { addProduct, getAllProducts, deleteProduct, getProductById, updateProduct } = require('../../controllers/productController');
-const { verifyToken } = require('../../utils/jwtToken');
 const upload = require('../../utils/multer');
+const { verifyToken } = require('../../utils/jwtToken');
 
 const router = express.Router();
 
